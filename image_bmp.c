@@ -3,56 +3,44 @@
 #include <stdlib.h>
 #include <string.h>
 
-inline static void check_ptr(const void* pointer) {
-	if(!pointer) {
-		printf("MEMORY_ERROR");
-		exit(0);
-	}
+#define CHECK_PTR(pointer)      \
+	if(!pointer) {              \
+		printf("MEMORY_ERROR"); \
+		exit(0);				\
+	}							\
+
+inline static void swap_char(char* a, char* b) {
+	char temp = *a;
+	*a = *b;
+	*b = temp;
 }
 
-inline static void swap(char* ptr_a[], char* ptr_b[]) {
-	char* temp = *ptr_a;
-	*ptr_a = *ptr_b;
-	*ptr_b = temp;
+inline static void swap_array(char* a, char* b, const unsigned int length) {
+	for(unsigned int i = 0; i < length; i++)
+		swap_char(&a[i], &b[i]);
 }
 
 ImageBMP* alloc_image(const unsigned int width, const unsigned int height, const unsigned int pixel_size, const unsigned int header_size) {
 	ImageBMP* image = (ImageBMP*)malloc(sizeof(ImageBMP));
-	check_ptr(image);
+	CHECK_PTR(image);
 
 	image->width = width;
 	image->height = height;
 	image->pixel_size = pixel_size;
 
-	image->data = (char***)calloc(height, sizeof(char**));
-	check_ptr(image->data);
-	for(unsigned int i = 0; i < height; i++) {
-		image->data[i] = (char**)calloc(width, sizeof(char*));
-		check_ptr(image->data[i]);
-
-		for(unsigned int j = 0; j < width; j++) {
-			image->data[i][j] = (char*)calloc(pixel_size, sizeof(char));
-			check_ptr(image->data[i][j]);
-		}
-	}
+	image->data = (char*)calloc(height * width * pixel_size, sizeof(char));
+	CHECK_PTR(image->data);
 
 	image->header_size = header_size;
 	image->header = (char*)calloc(header_size, sizeof(char));
-	check_ptr(image->header);
+	CHECK_PTR(image->header);
 
 	return image;
 }
 
 void dealloc_image(ImageBMP* image) {
-	for(unsigned int i = 0; i < image->height; i++) {
-		for(unsigned int j = 0; j < image->width; j++)
-			free(image->data[i][j]);
-		free(image->data[i]);
-	}
 	free(image->data);
-
 	free(image->header);
-
 	free(image);
 }
 
@@ -77,15 +65,15 @@ ImageBMP* open_image(FILE* file) {
 	ImageBMP* image = alloc_image(width, height, pixel_size, header_size);
 	rewind(file);
 	fread(image->header, sizeof(char), header_size, file);
-	
+
 	char padding = (image->width * image->pixel_size) % 4;
 	if(padding)
 		padding = 4 - padding;
 
-	for(unsigned int i = 0; i < height; i++) {
-		for(unsigned int j = 0; j < width; j++)
-			fread(image->data[i][j], sizeof(char), pixel_size, file);
-		
+	for(unsigned int i = 0; i < image->height; i++) {
+		for(unsigned int j = 0; j < image->width; j++)
+			fread(get_pixel(image, i, j), sizeof(char), pixel_size, file);
+
 		fseek(file, sizeof(char) * padding, SEEK_CUR);
 	}
 
@@ -97,7 +85,7 @@ ImageBMP* duplicate_image(const ImageBMP* image) {
 
 	for(unsigned int i = 0; i < image->height; i++)
 		for(unsigned int j = 0; j < image->width; j++)
-			memcpy(new_image->data[i][j], image->data[i][j], sizeof(char) * image->pixel_size);
+			memcpy(get_pixel(new_image, i, j), get_pixel(image, i, j), sizeof(char) * image->pixel_size);
 
 	memcpy(new_image->header, image->header, sizeof(char) * image->header_size);
 
@@ -116,7 +104,7 @@ void save_image(const ImageBMP* image, FILE* file) {
 	int zero = 0;
 	for(unsigned int i = 0; i < image->height; i++) {
 		for(unsigned int j = 0; j < image->width; j++)
-			fwrite(image->data[i][j], sizeof(char), image->pixel_size, file);
+			fwrite(get_pixel(image, i, j), sizeof(char), image->pixel_size, file);
 
 		fwrite(&zero, sizeof(char), padding, file);
 	}
@@ -126,21 +114,36 @@ void flip_horizontally_image(ImageBMP* image) {
 	unsigned int half_width = image->width >> 1;
 
 	for(unsigned int i = 0; i < image->height; i++)
-		for(unsigned int j = 0; j < half_width; j++)
-			swap(&image->data[i][j], &image->data[i][image->width - 1 - j]);
+		for(unsigned int j = 0; j < half_width; j++) {
+			char* first_pixel = get_pixel(image, i, j);
+			char* second_pixel = get_pixel(image, i, image->width - 1 - j);
+
+			swap_array(first_pixel, second_pixel, image->pixel_size);
+		}
 }
 
 void flip_vertically_image(ImageBMP* image) {
 	unsigned int half_height = image->height >> 1;
 
 	for(unsigned int i = 0; i < half_height; i++)
-		for(unsigned int j = 0; j < image->width; j++)
-			swap(&image->data[i][j], &image->data[image->height - 1 - i][j]);
+		for(unsigned int j = 0; j < image->width; j++) {
+			char* first_pixel = get_pixel(image, i, j);
+			char* second_pixel = get_pixel(image, image->height - 1 - i, j);
+
+			swap_array(first_pixel, second_pixel, image->pixel_size);
+		}
 }
 
 void invert_image(ImageBMP* image) {
 	for(unsigned int i = 0; i < image->height; i++)
-		for(unsigned int j = 0; j < image->width; j++)
+		for(unsigned int j = 0; j < image->width; j++) {
+			char* pixel = get_pixel(image, i, j);
+
 			for(unsigned int k = 0; k < image->pixel_size; k++)
-				image->data[i][j][k] = ~image->data[i][j][k];
+				pixel[k] = ~pixel[k];
+		}
+}
+
+char* get_pixel(const ImageBMP* image, const unsigned int i, const unsigned int j) {
+	return &image->data[(i * image->width + j) * image->pixel_size];
 }

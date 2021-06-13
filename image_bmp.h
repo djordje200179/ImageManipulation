@@ -7,7 +7,7 @@ typedef struct ImageBMP {
 	unsigned int width, height;
 	unsigned int pixel_size;
 
-	char*** data;
+	char* data;
 
 	unsigned int header_size;
 	char* header;
@@ -24,4 +24,5 @@ void flip_horizontally_image(ImageBMP* image);
 void flip_vertically_image(ImageBMP* image);
 void invert_image(ImageBMP* image);
 
+char* get_pixel(const ImageBMP* image, const unsigned int i, const unsigned int j);
 #endif // IMAGE
