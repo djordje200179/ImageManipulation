@@ -18,17 +18,12 @@
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="image_bmp.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="image_bmp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\image.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\image_out.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

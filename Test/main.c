@@ -1,17 +1,19 @@
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
 #include <stdio.h>
-#include "image_bmp.h"
+#include <ImageManipulation/bmp_loader.h>
+#include <ImageManipulation/image.h>
+#include <ImageManipulation/manipulator.h>
 
 int main() {
 	FILE* input_file = fopen("res/image.bmp", "rb");
 	FILE* output_file = fopen("res/image_out.bmp", "wb");
 	printf("DEBUG: Files loaded\n");
 
-	ImageBMP* original_image = open_image(input_file);
+	Image* original_image = open_bmp_image(input_file);
 	printf("DEBUG: Image loaded\n");
 
-	ImageBMP* new_image = duplicate_image(original_image);
+	Image* new_image = duplicate_image(original_image);
 	printf("DEBUG: Image duplicated\n");
 
 	flip_horizontally_image(new_image);
@@ -19,7 +21,7 @@ int main() {
 	invert_image(new_image);
 	printf("DEBUG: Image edited\n");
 
-	save_image(new_image, output_file);
+	save_bmp_image(new_image, output_file);
 	printf("DEBUG: Image saved\n");
 
 	dealloc_image(original_image);
