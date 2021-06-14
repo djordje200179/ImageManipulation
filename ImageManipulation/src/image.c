@@ -12,11 +12,11 @@ Image* alloc_image(const unsigned int width, const unsigned int height, const un
 	image->height = height;
 	image->pixel_size = pixel_size;
 
-	image->data = (char*)calloc(height * width * pixel_size, 1);
+	image->data = (char*)calloc(height * width * pixel_size, sizeof(char));
 	CHECK_PTR(image->data);
 
 	image->header_size = header_size;
-	image->header = (char*)calloc(header_size, 1);
+	image->header = (char*)calloc(header_size, sizeof(char));
 	CHECK_PTR(image->header);
 
 	return image;
@@ -33,17 +33,13 @@ Image* duplicate_image(const Image* image) {
 
 	for(unsigned int i = 0; i < image->height; i++)
 		for(unsigned int j = 0; j < image->width; j++)
-			memcpy(get_pixel(new_image, i, j), get_pixel(image, i, j), image->pixel_size);
+			memcpy(get_pixel(new_image, i, j), get_pixel(image, i, j), sizeof(char) * image->pixel_size);
 
-	memcpy(new_image->header, image->header, image->header_size);
+	memcpy(new_image->header, image->header, sizeof(char) * image->header_size);
 
 	return new_image;
 }
 
-Pixel get_pixel(const Image* image, const unsigned int i, const unsigned int j) {
+char* get_pixel(const Image* image, const unsigned int i, const unsigned int j) {
 	return &image->data[(i * image->width + j) * image->pixel_size];
-}
-
-void set_pixel(const Image* image, const unsigned int i, const unsigned int j, const Pixel value) {
-	memcpy(get_pixel(image, i, j), value, image->pixel_size);
 }
