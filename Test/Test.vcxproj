@@ -155,16 +155,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="basic_operations.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="pixel_sorting.c" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\image.bmp" />
-    <Image Include="res\image_out.bmp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ImageManipulation\ImageManipulation.vcxproj">
       <Project>{1e7c59c4-2a66-43da-a256-ca817add87a4}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

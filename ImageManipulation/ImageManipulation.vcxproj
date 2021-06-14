@@ -175,12 +175,14 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\ImageManipulation\effects.h" />
     <ClInclude Include="include\ImageManipulation\bmp_loader.h" />
     <ClInclude Include="include\ImageManipulation\image.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="include\ImageManipulation\manipulator.h" />
+    <ClInclude Include="include\ImageManipulation\transformations.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\effects.c" />
     <ClCompile Include="pch.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -189,7 +191,7 @@
     </ClCompile>
     <ClCompile Include="src\bmp_loader.c" />
     <ClCompile Include="src\image.c" />
-    <ClCompile Include="src\manipulator.c" />
+    <ClCompile Include="src\transformations.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
