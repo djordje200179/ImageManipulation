@@ -3,7 +3,15 @@
 
 #include "image.h"
 
-void flip_horizontally_image(const Image* image);
-void flip_vertically_image(const Image* image);
+typedef enum FlipDirection {
+	HORIZONTAL, VERTICAL
+} FlipDirection;
+
+typedef enum RotationDirection {
+	LEFT, RIGHT
+} RotationDirection;
+
+void flip_image(const Image* image, const FlipDirection direction);
+void rotate_image(Image* image, const RotationDirection direction);
 
 #endif // TRANSFORMATIONS
