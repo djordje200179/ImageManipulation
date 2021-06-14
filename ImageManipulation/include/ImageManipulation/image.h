@@ -1,6 +1,8 @@
 #ifndef IMAGE
 #define IMAGE
 
+typedef char* Pixel;
+
 typedef struct Image {
 	unsigned int width, height;
 	unsigned int pixel_size;
@@ -16,6 +18,6 @@ void dealloc_image(Image* image);
 
 Image* duplicate_image(const Image* image);
 
-char* get_pixel(const Image* image, const unsigned int i, const unsigned int j);
+Pixel get_pixel(const Image* image, const unsigned int i, const unsigned int j);
 
 #endif // IMAGE
