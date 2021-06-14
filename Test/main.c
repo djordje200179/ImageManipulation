@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <ImageManipulation/bmp_loader.h>
 #include <ImageManipulation/image.h>
-#include <ImageManipulation/manipulator.h>
+#include <ImageManipulation/transformations.h>
+#include <ImageManipulation/effects.h>
 
 int main() {
 	FILE* input_file = fopen("res/image.bmp", "rb");

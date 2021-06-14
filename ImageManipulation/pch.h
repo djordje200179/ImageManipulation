@@ -5,6 +5,7 @@
 
 #include "ImageManipulation/image.h"
 #include "ImageManipulation/bmp_loader.h"
-#include "ImageManipulation/manipulator.h"
+#include "ImageManipulation/transformations.h"
+#include "ImageManipulation/effects.h"
 
 #endif // PCH_H

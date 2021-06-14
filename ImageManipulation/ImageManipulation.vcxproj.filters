@@ -18,7 +18,10 @@
     <ClInclude Include="include\ImageManipulation\bmp_loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ImageManipulation\manipulator.h">
+    <ClInclude Include="include\ImageManipulation\transformations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ImageManipulation\effects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -30,7 +33,10 @@
     <ClCompile Include="src\bmp_loader.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\manipulator.c">
+    <ClCompile Include="src\transformations.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\effects.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
