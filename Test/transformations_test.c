@@ -10,8 +10,9 @@ void transformations_test() {
 	Image* image = open_bmp_image(input_file);
 	fclose(input_file);
 
-	flip_image(image, VERTICAL);
 	flip_image(image, HORIZONTAL);
+	flip_image(image, VERTICAL);
+	//rotate_image(image, LEFT);
 
 	FILE* output_file = fopen("res/image_test1.bmp", "wb");
 	save_bmp_image(image, output_file);

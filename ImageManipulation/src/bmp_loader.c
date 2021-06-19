@@ -5,7 +5,7 @@
 Image* open_bmp_image(FILE* file) {
 	unsigned int width = 0;
 	unsigned int height = 0;
-	unsigned int pixel_size = 0;
+	unsigned short pixel_size = 0;
 	unsigned int header_size = 0;
 
 	fseek(file, 0x0A, SEEK_SET);
@@ -17,7 +17,6 @@ Image* open_bmp_image(FILE* file) {
 
 	fseek(file, 0x1C, SEEK_SET);
 	fread(&pixel_size, 2, 1, file);
-	pixel_size &= 0xFFFF;
 	pixel_size /= CHAR_BIT;
 
 	Image* image = alloc_image(width, height, pixel_size, header_size);
@@ -54,4 +53,12 @@ void save_bmp_image(const Image* image, FILE* file) {
 
 		fwrite(&zero, 1, padding, file);
 	}
+
+	fseek(file, 0x12, SEEK_SET);
+	fwrite(&image->width, 4, 1, file);
+	fwrite(&image->height, 4, 1, file);
+
+	unsigned short pixel_size = image->pixel_size * CHAR_BIT;
+	fseek(file, 0x1C, SEEK_SET);
+	fwrite(&pixel_size, 2, 1, file);
 }

@@ -4,7 +4,9 @@
 
 #define CHECK_PTR(pointer) if(!pointer) exit(1);
 
-Image* alloc_image(const unsigned int width, const unsigned int height, const unsigned int pixel_size, const unsigned int header_size) {
+typedef unsigned long long ull;
+
+Image* alloc_image(const unsigned int width, const unsigned int height, const unsigned short pixel_size, const unsigned int header_size) {
 	Image* image = (Image*)malloc(sizeof(Image));
 	CHECK_PTR(image);
 
@@ -12,7 +14,7 @@ Image* alloc_image(const unsigned int width, const unsigned int height, const un
 	image->height = height;
 	image->pixel_size = pixel_size;
 
-	image->data = (char*)calloc(height * width * pixel_size, 1);
+	image->data = (char*)calloc((ull)height * width * pixel_size, 1);
 	CHECK_PTR(image->data);
 
 	image->header_size = header_size;
@@ -30,11 +32,8 @@ void dealloc_image(Image* image) {
 
 Image* duplicate_image(const Image* image) {
 	Image* new_image = alloc_image(image->width, image->height, image->pixel_size, image->header_size);
-
-	for(unsigned int i = 0; i < image->height; i++)
-		for(unsigned int j = 0; j < image->width; j++)
-			memcpy(get_pixel(new_image, i, j), get_pixel(image, i, j), image->pixel_size);
-
+	
+	memcpy(new_image->data, image->data, (ull)image->width * image->height * image->pixel_size);
 	memcpy(new_image->header, image->header, image->header_size);
 
 	return new_image;

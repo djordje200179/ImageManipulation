@@ -1,9 +1,9 @@
 #include "pch.h"
 
-#define SWAP(x, y) { int t = x; x = y; y = t; }
+#define SWAP(x, y) { long long t = x; x = y; y = t; }
 
-inline static void swap_pixels(Pixel a, Pixel b, const unsigned int pixel_size) {
-	for(unsigned int i = 0; i < pixel_size; i++)
+inline static void swap_pixels(Pixel a, Pixel b, const unsigned short pixel_size) {
+	for(unsigned short i = 0; i < pixel_size; i++)
 		SWAP(a[i], b[i]);
 }
 
@@ -21,4 +21,10 @@ void flip_image(const Image* image, const FlipDirection direction) {
 
 			swap_pixels(first_pixel, second_pixel, image->pixel_size);
 		}
+}
+
+void rotate_image(Image* image, const RotationDirection direction) {
+	
+
+
 }

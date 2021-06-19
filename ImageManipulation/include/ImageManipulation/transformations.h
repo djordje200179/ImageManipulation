@@ -4,7 +4,7 @@
 #include "image.h"
 
 typedef enum FlipDirection {
-	HORIZONTAL, VERTICAL
+	HORIZONTAL = 1, VERTICAL = 2
 } FlipDirection;
 
 typedef enum RotationDirection {
