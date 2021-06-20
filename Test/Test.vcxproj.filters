@@ -11,10 +11,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="transformations_test.c">
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="transformations_test.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
-    <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\image.bmp">
@@ -22,7 +22,7 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="tests.h">
+    <ClInclude Include="tests.hpp">
       <Filter>Tests</Filter>
     </ClInclude>
   </ItemGroup>

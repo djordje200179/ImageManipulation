@@ -11,32 +11,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="include\ImageManipulation\image.h">
+    <ClInclude Include="include\ImageManipulation\image.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\ImageManipulation\bmp_loader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ImageManipulation\transformations.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ImageManipulation\effects.h">
+    <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.c" />
-    <ClCompile Include="src\image.c">
+    <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\bmp_loader.c">
+    <ClCompile Include="src\image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\transformations.c">
+    <ClCompile Include="src\effects.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\effects.c">
+    <ClCompile Include="src\transformations.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
