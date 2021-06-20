@@ -39,8 +39,7 @@ namespace ImageManipulation {
 
 		data.resize((ull)dimensions.first * dimensions.second * pixel_size);
 		for(auto i = 0u; i < dimensions.first; i++) {
-			for(auto j = 0u; j < dimensions.second; j++)
-				stream.read(&*get_pixel({ i, j }), pixel_size);
+			stream.read(&*get_pixel({ i, 0 }), (ull)dimensions.second * pixel_size);
 
 			stream.seekg(padding, std::ios::cur);
 		}
@@ -58,8 +57,7 @@ namespace ImageManipulation {
 
 		auto zero = '\0';
 		for(auto i = 0u; i < dimensions.first; i++) {
-			for(auto j = 0u; j < dimensions.second; j++)
-				stream.write(&*get_pixel({ i, j }), pixel_size);
+			stream.write(&*get_pixel({ i, 0 }), (ull)dimensions.second * pixel_size);
 
 			stream.write(&zero, padding);
 		}
