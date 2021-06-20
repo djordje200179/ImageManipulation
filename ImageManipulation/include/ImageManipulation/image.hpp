@@ -38,13 +38,14 @@ namespace ImageManipulation {
 		Image(std::ifstream& stream);
 		Image(const char* file_path);
 
+		std::vector<char>::const_iterator get_pixel(Coordinates coordinate) const;
 		std::vector<char>::iterator get_pixel(Coordinates coordinate);
 
 		Dimensions get_dimensions() const;
 		unsigned short get_pixel_size() const;
 
-		void save_image(std::ofstream& stream);
-		void save_image(const char* file_path);
+		void save_image(std::ofstream& stream) const;
+		void save_image(const char* file_path) const;
 
 		void flip(FlipDirection direction);
 		void rotate(RotationDirection direction);

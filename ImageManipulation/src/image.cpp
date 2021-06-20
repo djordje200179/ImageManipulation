@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "..\include\ImageManipulation\image.hpp"
 
 namespace ImageManipulation {
 	Image::Image(Dimensions dimensions, const unsigned short pixel_size, const unsigned int header_size)
@@ -7,12 +8,18 @@ namespace ImageManipulation {
 		header.resize(header_size);
 	}
 
+	std::vector<char>::const_iterator Image::get_pixel(Coordinates coordinate) const {
+		std::vector<char>::const_iterator begin = data.begin();
+		auto offset = ((ull)coordinate.first * dimensions.second + coordinate.second) * pixel_size;
+
+		return begin + offset;
+	}
+
 	std::vector<char>::iterator Image::get_pixel(Coordinates coordinate) {
 		auto begin = data.begin();
 		auto offset = ((ull)coordinate.first * dimensions.second + coordinate.second) * pixel_size;
 
-		auto iterator = begin + offset;
-		return iterator;
+		return begin + offset;
 	}
 
 	Dimensions Image::get_dimensions() const {

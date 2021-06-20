@@ -45,7 +45,7 @@ namespace ImageManipulation {
 		}
 	}
 
-	void Image::save_image(std::ofstream& stream) {
+	void Image::save_image(std::ofstream& stream) const {
 		stream.clear();
 		stream.seekp(0);
 
@@ -63,15 +63,15 @@ namespace ImageManipulation {
 		}
 
 		stream.seekp(0x12);
-		stream.write(reinterpret_cast<char*>(&dimensions.second), 4);
-		stream.write(reinterpret_cast<char*>(&dimensions.first), 4);
+		stream.write(reinterpret_cast<const char*>(&dimensions.second), 4);
+		stream.write(reinterpret_cast<const char*>(&dimensions.first), 4);
 
 		auto pixel_size = this->pixel_size * CHAR_BIT;
 		stream.seekp(0x1C);
-		stream.write(reinterpret_cast<char*>(&pixel_size), 2);
+		stream.write(reinterpret_cast<const char*>(&pixel_size), 2);
 	}
 
-	void Image::save_image(const char* file_path) {
+	void Image::save_image(const char* file_path) const {
 		std::ofstream stream;
 		stream.open(file_path, std::ios::binary);
 
