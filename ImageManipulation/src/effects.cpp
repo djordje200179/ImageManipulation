@@ -3,8 +3,8 @@
 
 namespace ImageManipulation {
 	void Image::invert() {
-		std::transform(data.begin(), data.end(), data.begin(), [](char c) {
-			return ~c;
-		});
+		for(auto& byte : data) {
+			byte ^= 0xFF;
+		}
 	}
 }
