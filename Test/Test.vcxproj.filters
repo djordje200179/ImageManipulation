@@ -12,7 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="transformations_test.cpp">
+    <ClCompile Include="tests.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>

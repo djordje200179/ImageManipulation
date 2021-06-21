@@ -4,6 +4,7 @@
 
 int main() {
 	transformations_test();
+	effects_test();
 
 	_CrtDumpMemoryLeaks();
 
