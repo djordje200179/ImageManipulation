@@ -3,22 +3,32 @@
 
 namespace ImageManipulation {
 	void Image::flip(FlipDirection direction) {
-		auto height = dimensions.first >> (direction == FlipDirection::VERTICAL ? 1 : 0);
-		auto width = dimensions.second >> (direction == FlipDirection::HORIZONTAL ? 1 : 0);
+		auto iteration_height = dimensions.first >> (direction == FlipDirection::VERTICAL ? 1 : 0);;
+		auto iteration_width = dimensions.second >> (direction == FlipDirection::HORIZONTAL ? 1 : 0);
 
-		for(auto i = 0u; i < height; i++)
-			for(auto j = 0u; j < width; j++) {
-				Dimensions first_coordinate { i, j };
-				Dimensions second_coordinate {
-					direction == FlipDirection::VERTICAL ? dimensions.first - 1 - i : i,
-					direction == FlipDirection::HORIZONTAL ? dimensions.second - 1 - j : j
-				};
+		if(direction == FlipDirection::HORIZONTAL) {
+			for(auto i = 0u; i < iteration_height; i++) {
+				for(auto j = 0u; j < iteration_width; j++) {
+					auto first_coordinate = Dimensions { i, j };
+					auto second_coordinate = Dimensions { i, dimensions.second - 1 - j };
 
-				auto first_pixel = get_pixel(first_coordinate);
-				auto second_pixel = get_pixel(second_coordinate);
+					auto first_row = get_pixel(first_coordinate);
+					auto second_row = get_pixel(second_coordinate);
 
-				std::swap_ranges(first_pixel, first_pixel + pixel_size, second_pixel);
+					std::swap_ranges(first_row, first_row + pixel_size, second_row);
+				}
 			}
+		} else if(direction == FlipDirection::VERTICAL) {
+			for(auto i = 0u; i < iteration_height; i++) {
+				auto first_coordinate = Dimensions { i, 0 };
+				auto second_coordinate = Dimensions { dimensions.first - 1 - i, 0 };
+
+				auto first_row = get_pixel(first_coordinate);
+				auto second_row = get_pixel(second_coordinate);
+
+				std::swap_ranges(first_row, first_row + (ull)dimensions.second * pixel_size, second_row);
+			}
+		}
 	}
 
 	void Image::rotate(RotationDirection direction) {
