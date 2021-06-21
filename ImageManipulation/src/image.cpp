@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "..\include\ImageManipulation\image.hpp"
 
 namespace ImageManipulation {
 	Image::Image(Dimensions dimensions, const unsigned short pixel_size, const unsigned int header_size)

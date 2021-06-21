@@ -5,7 +5,7 @@
 void transformations_test() {
 	std::cout << "TEST: Transformations" << std::endl;
 
-	ImageManipulation::Image image("res/image.bmp");
+	auto image = ImageManipulation::Image("res/image.bmp");
 
 	image.flip(ImageManipulation::FlipDirection::HORIZONTAL);
 	image.flip(ImageManipulation::FlipDirection::VERTICAL);

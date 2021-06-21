@@ -7,8 +7,7 @@ namespace ImageManipulation {
 	}
 
 	Image::Image(const char* file_path) {
-		std::ifstream stream;
-		stream.open(file_path, std::ios::binary);
+		auto stream = std::ifstream(file_path, std::ios::binary);
 
 		load_image(stream);
 
@@ -72,8 +71,7 @@ namespace ImageManipulation {
 	}
 
 	void Image::save_image(const char* file_path) const {
-		std::ofstream stream;
-		stream.open(file_path, std::ios::binary);
+		auto stream = std::ofstream(file_path, std::ios::binary);
 
 		save_image(stream);
 
