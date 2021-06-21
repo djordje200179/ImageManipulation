@@ -156,7 +156,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\image.bmp" />
@@ -167,6 +166,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="test.hpp" />
     <ClInclude Include="tests.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

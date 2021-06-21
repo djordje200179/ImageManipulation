@@ -12,9 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="tests.cpp">
-      <Filter>Tests</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\image.bmp">
@@ -23,6 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tests.hpp">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="test.hpp">
       <Filter>Tests</Filter>
     </ClInclude>
   </ItemGroup>
