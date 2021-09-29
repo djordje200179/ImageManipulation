@@ -14,14 +14,9 @@
     <ClInclude Include="include\ImageManipulation\image.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -34,5 +29,6 @@
     <ClCompile Include="src\loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="pch.cpp" />
   </ItemGroup>
 </Project>
