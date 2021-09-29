@@ -97,7 +97,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>C:\Programiranje\Vjezbe\ImageManipulation\ImageManipulation;C:\Programiranje\Vjezbe\ImageManipulation\ImageManipulation\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -118,7 +118,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>C:\Programiranje\Vjezbe\ImageManipulation\ImageManipulation;C:\Programiranje\Vjezbe\ImageManipulation\ImageManipulation\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -139,7 +139,7 @@
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>C:\Programiranje\Vjezbe\ImageManipulation\ImageManipulation;C:\Programiranje\Vjezbe\ImageManipulation\ImageManipulation\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -160,7 +160,7 @@
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>C:\Programiranje\Vjezbe\ImageManipulation\ImageManipulation;C:\Programiranje\Vjezbe\ImageManipulation\ImageManipulation\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -176,7 +176,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\ImageManipulation\image.hpp" />
-    <ClInclude Include="pch.h" />
+    <ClInclude Include="pch.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

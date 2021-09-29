@@ -14,7 +14,7 @@
     <ClInclude Include="include\ImageManipulation\image.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h" />
+    <ClInclude Include="pch.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\image.cpp">
