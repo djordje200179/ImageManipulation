@@ -6,8 +6,8 @@ Image::Image(std::ifstream& stream) {
 	loadImage(stream);
 }
 
-Image::Image(const std::string& file_path) {
-	auto stream = std::ifstream(file_path, std::ios::binary);
+Image::Image(const std::string& filePath) {
+	auto stream = std::ifstream(filePath, std::ios::binary);
 
 	loadImage(stream);
 
