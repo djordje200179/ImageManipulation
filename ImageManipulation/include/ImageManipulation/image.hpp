@@ -7,8 +7,8 @@
 namespace ImageManipulation {
 typedef unsigned long long ull;
 
-typedef std::pair<unsigned int, unsigned int> Dimensions;
-typedef std::pair<unsigned int, unsigned int> Coordinates;
+typedef std::pair<ull, ull> Dimensions;
+typedef std::pair<ull, ull> Coordinates;
 
 enum class FlipDirection {
 	NONE = 0,
