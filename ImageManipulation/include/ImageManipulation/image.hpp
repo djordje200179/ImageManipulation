@@ -25,27 +25,27 @@ enum class RotationDirection {
 class Image {
 private:
 	Dimensions dimensions;
-	unsigned short pixel_size;
+	unsigned short pixelSize;
 
 	std::vector<char> data;
 
-	unsigned int header_size;
+	unsigned int headerSize;
 	std::vector<char> header;
 
-	void load_image(std::ifstream& stream);
+	void loadImage(std::ifstream& stream);
 public:
-	Image(Dimensions dimensions, unsigned short pixel_size, unsigned int header_size);
+	Image(Dimensions dimensions, unsigned short pixelSize, unsigned int headerSize);
 	Image(std::ifstream& stream);
-	Image(const char* file_path);
+	Image(const char* filePath);
 
-	std::vector<char>::const_iterator get_pixel(Coordinates coordinate) const;
-	std::vector<char>::iterator get_pixel(Coordinates coordinate);
+	std::vector<char>::const_iterator getPixel(Coordinates coordinate) const;
+	std::vector<char>::iterator getPixel(Coordinates coordinate);
 
-	Dimensions get_dimensions() const;
-	unsigned short get_pixel_size() const;
+	Dimensions getDimensions() const;
+	unsigned short getPixelSize() const;
 
-	void save_image(std::ofstream& stream) const;
-	void save_image(const char* file_path) const;
+	void saveImage(std::ofstream& stream) const;
+	void saveImage(const char* filePath) const;
 
 	void flip(FlipDirection direction);
 	void rotate(RotationDirection direction);

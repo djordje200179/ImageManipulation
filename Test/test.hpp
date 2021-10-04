@@ -15,11 +15,11 @@ public:
 	void test() {
 		std::cout << "TEST: " << name << std::endl;
 
-		auto start_time = std::chrono::high_resolution_clock::now();
+		auto startTime = std::chrono::high_resolution_clock::now();
 		function();
-		auto end_time = std::chrono::high_resolution_clock::now();
+		auto endTime = std::chrono::high_resolution_clock::now();
 
-		auto execution_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-		std::cout << "Execution time: " << execution_time.count() << "ms" << std::endl << std::endl;
+		auto executionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+		std::cout << "Execution time: " << executionTime.count() << "ms" << std::endl << std::endl;
 	}
 };

@@ -4,8 +4,8 @@
 #include "test.hpp"
 
 int main() {
-	Test("Transformations", transformations_test).test();
-	Test("Effects", transformations_test).test();
+	Test("Transformations", transformationsTest).test();
+	Test("Effects", transformationsTest).test();
 
 	_CrtDumpMemoryLeaks();
 
