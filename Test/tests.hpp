@@ -11,7 +11,7 @@ void transformationsTest() {
 	image.flip(ImageManipulation::FlipDirection::VERTICAL);
 	//rotate_image(image, RotationDirection::LEFT);
 
-	image.save_image("res/image_test1.bmp");
+	image.saveImage("res/image_test1.bmp");
 }
 
 void effectsTest() {
@@ -19,5 +19,5 @@ void effectsTest() {
 
 	image.invert();
 
-	image.save_image("res/image_test2.bmp");
+	image.saveImage("res/image_test2.bmp");
 }
