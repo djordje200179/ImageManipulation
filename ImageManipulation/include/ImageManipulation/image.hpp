@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <fstream>
+#include <string>
 #include <utility>
 
 namespace ImageManipulation {
@@ -36,7 +37,7 @@ private:
 public:
 	Image(Dimensions dimensions, unsigned short pixelSize, unsigned int headerSize);
 	Image(std::ifstream& stream);
-	Image(const char* filePath);
+	Image(const std::string& filePath);
 
 	std::vector<char>::const_iterator getPixel(Coordinates coordinate) const;
 	std::vector<char>::iterator getPixel(Coordinates coordinate);
@@ -45,7 +46,7 @@ public:
 	unsigned short getPixelSize() const;
 
 	void saveImage(std::ofstream& stream) const;
-	void saveImage(const char* filePath) const;
+	void saveImage(const std::string& filePath) const;
 
 	void flip(FlipDirection direction);
 	void rotate(RotationDirection direction);

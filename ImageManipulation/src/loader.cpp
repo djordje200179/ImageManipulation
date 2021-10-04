@@ -6,7 +6,7 @@ Image::Image(std::ifstream& stream) {
 	loadImage(stream);
 }
 
-Image::Image(const char* file_path) {
+Image::Image(const std::string& file_path) {
 	auto stream = std::ifstream(file_path, std::ios::binary);
 
 	loadImage(stream);
@@ -70,7 +70,7 @@ void Image::saveImage(std::ofstream& stream) const {
 	stream.write(reinterpret_cast<const char*>(&pixelSize), 2);
 }
 
-void Image::saveImage(const char* filePath) const {
+void Image::saveImage(const std::string& filePath) const {
 	auto stream = std::ofstream(filePath, std::ios::binary);
 
 	saveImage(stream);
