@@ -2,54 +2,56 @@
 
 #include <vector>
 #include <fstream>
+#include <string>
 #include <utility>
 
 namespace ImageManipulation {
-	typedef unsigned long long ull;
+typedef unsigned long long ull;
+typedef unsigned short us;
 
-	typedef std::pair<unsigned int, unsigned int> Dimensions;
-	typedef std::pair<unsigned int, unsigned int> Coordinates;
+typedef std::pair<us, us> Dimensions;
+typedef std::pair<us, us> Coordinates;
 
-	enum class FlipDirection {
-		NONE = 0,
-		HORIZONTAL = 1,
-		VERTICAL = 2,
-		BOTH = 3
-	};
+enum class FlipDirection {
+	NONE = 0,
+	HORIZONTAL = 1,
+	VERTICAL = 2,
+	BOTH = 3
+};
 
-	enum class RotationDirection {
-		LEFT,
-		RIGHT
-	};
+enum class RotationDirection {
+	LEFT,
+	RIGHT
+};
 
-	class Image {
-	private:
-		Dimensions dimensions;
-		unsigned short pixel_size;
+class Image {
+private:
+	Dimensions dimensions;
+	unsigned short pixelSize;
 
-		std::vector<char> data;
+	std::vector<char> data;
 
-		unsigned int header_size;
-		std::vector<char> header;
+	unsigned int headerSize;
+	std::vector<char> header;
 
-		void load_image(std::ifstream& stream);
-	public:
-		Image(Dimensions dimensions, unsigned short pixel_size, unsigned int header_size);
-		Image(std::ifstream& stream);
-		Image(const char* file_path);
+	void loadImage(std::ifstream& stream);
+public:
+	Image(Dimensions dimensions, unsigned short pixelSize, unsigned int headerSize);
+	Image(std::ifstream& stream);
+	Image(const std::string& filePath);
 
-		std::vector<char>::const_iterator get_pixel(Coordinates coordinate) const;
-		std::vector<char>::iterator get_pixel(Coordinates coordinate);
+	std::vector<char>::const_iterator getPixel(Coordinates coordinate) const;
+	std::vector<char>::iterator getPixel(Coordinates coordinate);
 
-		Dimensions get_dimensions() const;
-		unsigned short get_pixel_size() const;
+	Dimensions getDimensions() const;
+	unsigned short getPixelSize() const;
 
-		void save_image(std::ofstream& stream) const;
-		void save_image(const char* file_path) const;
+	void saveImage(std::ofstream& stream) const;
+	void saveImage(const std::string& filePath) const;
 
-		void flip(FlipDirection direction);
-		void rotate(RotationDirection direction);
+	void flip(FlipDirection direction);
+	void rotate(RotationDirection direction);
 
-		void invert();
-	};
+	void invert();
+};
 }
