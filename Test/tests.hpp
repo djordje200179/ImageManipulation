@@ -5,7 +5,7 @@
 #include <ImageManipulation/image.hpp>
 
 void transformationsTest() {
-	auto image = ImageManipulation::Image("res/image.bmp");
+	ImageManipulation::Image image("res/image.bmp");
 
 	image.flip(ImageManipulation::FlipDirection::HORIZONTAL);
 	image.flip(ImageManipulation::FlipDirection::VERTICAL);
@@ -15,7 +15,7 @@ void transformationsTest() {
 }
 
 void effectsTest() {
-	auto image = ImageManipulation::Image("res/image.bmp");
+	ImageManipulation::Image image("res/image.bmp");
 
 	image.invert();
 

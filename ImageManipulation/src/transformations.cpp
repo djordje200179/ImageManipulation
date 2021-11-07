@@ -9,8 +9,8 @@ void Image::flip(FlipDirection direction) {
 	if(direction == FlipDirection::HORIZONTAL) {
 		for(auto i = 0u; i < iterationHeight; i++) {
 			for(auto j = 0u; j < iterationWidth; j++) {
-				auto firstCoordinate = Dimensions { i, j };
-				auto secondCoordinate = Dimensions { i, dimensions.second - 1 - j };
+				Dimensions firstCoordinate { i, j };
+				Dimensions secondCoordinate { i, dimensions.second - 1 - j };
 
 				auto firstRow = getPixel(firstCoordinate);
 				auto secondRow = getPixel(secondCoordinate);
@@ -20,8 +20,8 @@ void Image::flip(FlipDirection direction) {
 		}
 	} else if(direction == FlipDirection::VERTICAL) {
 		for(auto i = 0u; i < iterationHeight; i++) {
-			auto firstCoordinate = Dimensions { i, 0 };
-			auto secondCoordinate = Dimensions { dimensions.first - 1 - i, 0 };
+			Dimensions firstCoordinate { i, 0 };
+			Dimensions secondCoordinate { dimensions.first - 1 - i, 0 };
 
 			auto firstRow = getPixel(firstCoordinate);
 			auto secondRow = getPixel(secondCoordinate);
