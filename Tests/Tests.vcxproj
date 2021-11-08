@@ -181,6 +181,10 @@
     <Image Include="res\image_test1.bmp" />
     <Image Include="res\image_test2.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="effects.cpp" />
+    <ClCompile Include="transformations.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
