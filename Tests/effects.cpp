@@ -19,7 +19,7 @@ public:
 	TEST_METHOD(Invert) {
 		image->invert();
 
-		image->saveImage("res/image_test3.bmp");
+		image->saveImage("res/image_test_invert.bmp");
 	}
 };
 }

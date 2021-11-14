@@ -19,19 +19,19 @@ public:
 	TEST_METHOD(HorizontalFlip) {
 		image->flip(FlipDirection::HORIZONTAL);
 
-		image->saveImage("res/image_test1h.bmp");
+		image->saveImage("res/image_test_flip_h.bmp");
 	}
 
 	TEST_METHOD(VerticalFlip) {
 		image->flip(FlipDirection::VERTICAL);
 
-		image->saveImage("res/image_test1v.bmp");
+		image->saveImage("res/image_test_flip_v.bmp");
 	}
 
 	TEST_METHOD(Rotation) {
 		image->rotate(RotationDirection::RIGHT);
 
-		image->saveImage("res/image_test2.bmp");
+		image->saveImage("res/image_test_rotation.bmp");
 	}
 };
 }
