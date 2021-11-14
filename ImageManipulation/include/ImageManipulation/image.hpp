@@ -1,6 +1,5 @@
 #pragma once
 
-#include <vector>
 #include <fstream>
 #include <string>
 #include <utility>
@@ -36,10 +35,10 @@ private:
 	Dimensions dimensions;
 	uint16_t pixelSize;
 
-	std::vector<byte> data;
+	byte* data;
 
 	uint32_t headerSize;
-	std::vector<byte> header;
+	byte* header;
 
 	void loadImage(std::ifstream& stream);
 public:
@@ -47,8 +46,10 @@ public:
 	Image(std::ifstream& stream);
 	Image(const std::string& filePath);
 
-	std::vector<byte>::const_iterator getPixel(Coordinates coordinate) const;
-	std::vector<byte>::iterator getPixel(Coordinates coordinate);
+	~Image();
+
+	const byte* getPixel(Coordinates coordinate) const;
+	byte* getPixel(Coordinates coordinate);
 
 	Dimensions getDimensions() const;
 	unsigned short getPixelSize() const;

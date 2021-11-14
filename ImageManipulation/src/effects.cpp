@@ -3,7 +3,7 @@
 
 namespace ImageManipulation {
 void Image::invert() {
-	for(auto& byte : data)
-		byte ^= 0xFF;
+	for(ull i = 0; i < (ull)dimensions.height * dimensions.width * pixelSize; i++)
+		data[i] ^= 0xFF;
 }
 }

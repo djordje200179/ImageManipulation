@@ -14,6 +14,10 @@ Image::Image(const std::string& filePath) {
 	stream.close();
 }
 
+Image::~Image() {
+	delete data;
+}
+
 void Image::loadImage(std::ifstream& stream) {
 	stream.seekg(0x0A);
 	stream.read(reinterpret_cast<byte*>(&headerSize), 4);
@@ -29,16 +33,16 @@ void Image::loadImage(std::ifstream& stream) {
 	stream.clear();
 	stream.seekg(0);
 
-	header.resize(headerSize);
-	stream.read(header.data(), headerSize);
+	header = new byte[headerSize];
+	stream.read(header, headerSize);
 
 	uint8_t padding = ((ull)dimensions.width * pixelSize) % 4;
 	if(padding)
 		padding = 4 - padding;
 
-	data.resize((ull)dimensions.height * dimensions.width * pixelSize);
+	data = new byte[(ull)dimensions.height * dimensions.width * pixelSize];
 	for(auto i = 0u; i < dimensions.height; i++) {
-		stream.read(&*getPixel({ i, 0 }), (ull)dimensions.width * pixelSize);
+		stream.read(getPixel({ i, 0 }), (ull)dimensions.width * pixelSize);
 
 		stream.seekg(padding, std::ios::cur);
 	}
@@ -48,14 +52,14 @@ void Image::saveImage(std::ofstream& stream) const {
 	stream.clear();
 	stream.seekp(0);
 
-	stream.write(header.data(), headerSize);
+	stream.write(header, headerSize);
 
 	uint8_t padding = ((ull)dimensions.width * pixelSize) % 4;
 	if(padding)
 		padding = 4 - padding;
 
 	for(auto i = 0u; i < dimensions.height; i++) {
-		stream.write(&*getPixel({ i, 0 }), (ull)dimensions.width * pixelSize);
+		stream.write(getPixel({ i, 0 }), (ull)dimensions.width * pixelSize);
 
 		static const byte zero = 0;
 		stream.write(&zero, padding);
