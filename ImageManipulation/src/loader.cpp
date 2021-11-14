@@ -32,13 +32,13 @@ void Image::loadImage(std::ifstream& stream) {
 	header = new byte[headerSize];
 	stream.read(header, headerSize);
 
-	uint8_t padding = ((ull)dimensions.width * pixelSize) % 4;
+	uint8_t padding = ((DataMetric)dimensions.width * pixelSize) % 4;
 	if(padding)
 		padding = 4 - padding;
 
 	data = new byte[getDataSize()];
-	for(auto i = 0u; i < dimensions.height; i++) {
-		stream.read(getPixel({ i, 0 }), (ull)dimensions.width * pixelSize);
+	for(ImageMetric i = 0; i < dimensions.height; i++) {
+		stream.read(getPixel({ i, 0 }), (DataMetric)dimensions.width * pixelSize);
 
 		stream.seekg(padding, std::ios::cur);
 	}
@@ -50,12 +50,12 @@ void Image::saveImage(std::ofstream& stream) const {
 
 	stream.write(header, headerSize);
 
-	uint8_t padding = ((ull)dimensions.width * pixelSize) % 4;
+	uint8_t padding = ((DataMetric)dimensions.width * pixelSize) % 4;
 	if(padding)
 		padding = 4 - padding;
 
-	for(auto i = 0u; i < dimensions.height; i++) {
-		stream.write(getPixel({ i, 0 }), (ull)dimensions.width * pixelSize);
+	for(ImageMetric i = 0; i < dimensions.height; i++) {
+		stream.write(getPixel({ i, 0 }), (DataMetric)dimensions.width * pixelSize);
 
 		static const byte zero = 0;
 		stream.write(&zero, padding);
@@ -65,7 +65,7 @@ void Image::saveImage(std::ofstream& stream) const {
 	stream.write(reinterpret_cast<const char*>(&dimensions.width), 4);
 	stream.write(reinterpret_cast<const char*>(&dimensions.height), 4);
 
-	uint16_t pixelSize = this->pixelSize * CHAR_BIT;
+	PixelMetric pixelSize = this->pixelSize * CHAR_BIT;
 	stream.seekp(0x1C);
 	stream.write(reinterpret_cast<const char*>(&pixelSize), 2);
 }

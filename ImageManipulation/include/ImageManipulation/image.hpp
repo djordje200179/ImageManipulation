@@ -4,17 +4,21 @@
 #include <string>
 
 namespace ImageManipulation {
-using ull = unsigned long long;
+using ImageMetric = uint32_t;
+using DataMetric = uint64_t;
+using PixelMetric = uint16_t;
+using HeaderMetric = uint32_t;
+
 using byte = char;
 
 struct Dimensions {
-	uint32_t height;
-	uint32_t width;
+	ImageMetric height;
+	ImageMetric width;
 };
 
 struct Coordinates {
-	uint32_t y;
-	uint32_t x;
+	ImageMetric y;
+	ImageMetric x;
 };
 
 enum class FlipDirection : uint8_t {
@@ -31,7 +35,7 @@ enum class RotationDirection : uint8_t {
 
 class Image {
 public:
-	Image(Dimensions dimensions, uint16_t pixelSize, uint32_t headerSize);
+	Image(Dimensions dimensions, PixelMetric pixelSize, HeaderMetric headerSize);
 	Image(std::ifstream& stream);
 	Image(const std::string& filePath);
 
@@ -41,7 +45,7 @@ public:
 	byte* getPixel(Coordinates coordinate);
 
 	Dimensions getDimensions() const;
-	unsigned short getPixelSize() const;
+	PixelMetric getPixelSize() const;
 
 	void saveImage(std::ofstream& stream) const;
 	void saveImage(const std::string& filePath) const;
@@ -52,14 +56,14 @@ public:
 	void invert();
 private:
 	Dimensions dimensions;
-	uint16_t pixelSize;
+	PixelMetric pixelSize;
 
 	byte* data;
 
-	uint32_t headerSize;
+	HeaderMetric headerSize;
 	byte* header;
 
 	void loadImage(std::ifstream& stream);
-	ull getDataSize() const;
+	DataMetric getDataSize() const;
 };
 }

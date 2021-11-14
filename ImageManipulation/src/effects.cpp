@@ -3,7 +3,7 @@
 
 namespace ImageManipulation {
 void Image::invert() {
-	for(ull i = 0; i < getDataSize(); i++)
+	for(DataMetric i = 0; i < getDataSize(); i++)
 		data[i] ^= 0xFF;
 }
 }

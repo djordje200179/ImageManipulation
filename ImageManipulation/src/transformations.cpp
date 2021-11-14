@@ -7,8 +7,8 @@ void Image::flip(FlipDirection direction) {
 	auto iterationWidth = dimensions.width >> (direction == FlipDirection::HORIZONTAL ? 1 : 0);
 
 	if(direction == FlipDirection::HORIZONTAL) {
-		for(auto i = 0u; i < iterationHeight; i++) {
-			for(auto j = 0u; j < iterationWidth; j++) {
+		for(ImageMetric i = 0; i < iterationHeight; i++) {
+			for(ImageMetric j = 0; j < iterationWidth; j++) {
 				Coordinates firstCoordinate { i, j };
 				Coordinates secondCoordinate { i, dimensions.width - 1 - j };
 
@@ -19,14 +19,14 @@ void Image::flip(FlipDirection direction) {
 			}
 		}
 	} else if(direction == FlipDirection::VERTICAL) {
-		for(auto i = 0u; i < iterationHeight; i++) {
+		for(ImageMetric i = 0; i < iterationHeight; i++) {
 			Coordinates firstCoordinate { i, 0 };
 			Coordinates secondCoordinate { dimensions.height - 1 - i, 0 };
 
 			auto firstRow = getPixel(firstCoordinate);
 			auto secondRow = getPixel(secondCoordinate);
 
-			std::swap_ranges(firstRow, firstRow + (ull)dimensions.width * pixelSize, secondRow);
+			std::swap_ranges(firstRow, firstRow + (DataMetric)dimensions.width * pixelSize, secondRow);
 		}
 	}
 }
