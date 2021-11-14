@@ -3,22 +3,18 @@
 namespace ImageManipulation {
 Image::Image(Dimensions dimensions, PixelMetric pixelSize, HeaderMetric headerSize)
 	: dimensions(dimensions), pixelSize(pixelSize), headerSize(headerSize) {
-	header = new byte[headerSize];
-	data = new byte[getDataSize()];
-}
-
-Image::~Image() {
-	delete data;
+	header.resize(headerSize);
+	data.resize(getDataSize());
 }
 
 const byte* Image::getPixel(Coordinates coordinate) const {
 	auto offset = ((DataMetric)coordinate.y * dimensions.width + coordinate.x) * pixelSize;
-	return data + offset;
+	return data.data() + offset;
 }
 
 byte* Image::getPixel(Coordinates coordinate) {
 	auto offset = ((DataMetric)coordinate.y * dimensions.width + coordinate.x) * pixelSize;
-	return data + offset;
+	return data.data() + offset;
 }
 
 Dimensions Image::getDimensions() const {

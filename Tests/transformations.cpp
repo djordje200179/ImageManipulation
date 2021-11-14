@@ -6,13 +6,20 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace ImageManipulation {
 TEST_CLASS(Transformations) {
 public:
-	TEST_METHOD(Flip) {
+	TEST_METHOD(HorizontalFlip) {
 		Image image("res/image.bmp");
 
 		image.flip(FlipDirection::HORIZONTAL);
+
+		image.saveImage("res/image_test1h.bmp");
+	}
+
+	TEST_METHOD(VerticalFlip) {
+		Image image("res/image.bmp");
+
 		image.flip(FlipDirection::VERTICAL);
 
-		image.saveImage("res/image_test1.bmp");
+		image.saveImage("res/image_test1v.bmp");
 	}
 
 	TEST_METHOD(Rotation) {

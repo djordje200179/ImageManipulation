@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <string>
+#include <vector>
 
 namespace ImageManipulation {
 using ImageMetric = uint32_t;
@@ -39,8 +40,6 @@ public:
 	Image(std::ifstream& stream);
 	Image(const std::string& filePath);
 
-	~Image();
-
 	const byte* getPixel(Coordinates coordinate) const;
 	byte* getPixel(Coordinates coordinate);
 
@@ -54,14 +53,14 @@ public:
 	void rotate(RotationDirection direction);
 
 	void invert();
-private:
+private: 
 	Dimensions dimensions;
 	PixelMetric pixelSize;
 
-	byte* data;
+	std::vector<byte> data;
 
 	HeaderMetric headerSize;
-	byte* header;
+	std::vector<byte> header;
 
 	void loadImage(std::ifstream& stream);
 	DataMetric getDataSize() const;

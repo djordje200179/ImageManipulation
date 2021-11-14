@@ -30,14 +30,14 @@ void Image::loadImage(std::ifstream& stream) {
 	stream.clear();
 	stream.seekg(0);
 
-	header = new byte[headerSize];
-	stream.read(header, headerSize);
+	header.resize(headerSize);
+	stream.read(header.data(), headerSize);
 
 	uint8_t padding = ((DataMetric)dimensions.width * pixelSize) % 4;
 	if(padding)
 		padding = 4 - padding;
 
-	data = new byte[getDataSize()];
+	data.resize(getDataSize());
 	for(ImageMetric i = 0; i < dimensions.height; i++) {
 		stream.read(getPixel({ i, 0 }), (DataMetric)dimensions.width * pixelSize);
 
@@ -49,7 +49,7 @@ void Image::saveImage(std::ofstream& stream) const {
 	stream.clear();
 	stream.seekp(0);
 
-	stream.write(header, headerSize);
+	stream.write(header.data(), headerSize);
 
 	uint8_t padding = ((DataMetric)dimensions.width * pixelSize) % 4;
 	if(padding)
