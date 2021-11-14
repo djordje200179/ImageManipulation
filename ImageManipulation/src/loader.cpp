@@ -16,14 +16,14 @@ Image::Image(const std::string& filePath) {
 
 void Image::loadImage(std::ifstream& stream) {
 	stream.seekg(0x0A);
-	stream.read(reinterpret_cast<byte*>(&headerSize), 4);
+	stream.read(reinterpret_cast<byte*>(&headerSize), sizeof(HeaderMetric));
 
 	stream.seekg(0x12);
-	stream.read(reinterpret_cast<byte*>(&dimensions.width), 4);
-	stream.read(reinterpret_cast<byte*>(&dimensions.height), 4);
+	stream.read(reinterpret_cast<byte*>(&dimensions.width), sizeof(ImageMetric));
+	stream.read(reinterpret_cast<byte*>(&dimensions.height), sizeof(ImageMetric));
 
 	stream.seekg(0x1C);
-	stream.read(reinterpret_cast<byte*>(&pixelSize), 2);
+	stream.read(reinterpret_cast<byte*>(&pixelSize), sizeof(PixelMetric));
 	pixelSize /= CHAR_BIT;
 
 	stream.clear();
@@ -62,12 +62,12 @@ void Image::saveImage(std::ofstream& stream) const {
 	}
 
 	stream.seekp(0x12);
-	stream.write(reinterpret_cast<const char*>(&dimensions.width), 4);
-	stream.write(reinterpret_cast<const char*>(&dimensions.height), 4);
+	stream.write(reinterpret_cast<const byte*>(&dimensions.width), sizeof(ImageMetric));
+	stream.write(reinterpret_cast<const byte*>(&dimensions.height), sizeof(ImageMetric));
 
 	PixelMetric pixelSize = this->pixelSize * CHAR_BIT;
 	stream.seekp(0x1C);
-	stream.write(reinterpret_cast<const char*>(&pixelSize), 2);
+	stream.write(reinterpret_cast<const byte*>(&pixelSize), sizeof(PixelMetric));
 }
 
 void Image::saveImage(const std::string& filePath) const {
