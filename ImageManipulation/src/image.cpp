@@ -12,17 +12,13 @@ Image::~Image() {
 }
 
 const byte* Image::getPixel(Coordinates coordinate) const {
-	auto begin = data;
 	auto offset = ((ull)coordinate.y * dimensions.width + coordinate.x) * pixelSize;
-
-	return begin + offset;
+	return data + offset;
 }
 
 byte* Image::getPixel(Coordinates coordinate) {
-	auto begin = data;
 	auto offset = ((ull)coordinate.y * dimensions.width + coordinate.x) * pixelSize;
-
-	return begin + offset;
+	return data + offset;
 }
 
 Dimensions Image::getDimensions() const {
