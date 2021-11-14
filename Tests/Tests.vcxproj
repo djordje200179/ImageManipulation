@@ -177,9 +177,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\image.bmp" />
-    <Image Include="res\image_test1.bmp" />
-    <Image Include="res\image_test2.bmp" />
+    <Image Include="res\image.bmp">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="effects.cpp" />

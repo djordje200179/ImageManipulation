@@ -15,13 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\image_test2.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="res\image.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="res\image_test1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
