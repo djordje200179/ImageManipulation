@@ -5,29 +5,33 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace ImageManipulation {
 TEST_CLASS(Transformations) {
+private:
+	Image* image;
+
+	TEST_METHOD_INITIALIZE(Initialization) {
+		image = new Image("res/image.bmp");
+	}
+
+	TEST_METHOD_CLEANUP(Cleaning) {
+		delete image;
+	}
 public:
 	TEST_METHOD(HorizontalFlip) {
-		Image image("res/image.bmp");
+		image->flip(FlipDirection::HORIZONTAL);
 
-		image.flip(FlipDirection::HORIZONTAL);
-
-		image.saveImage("res/image_test1h.bmp");
+		image->saveImage("res/image_test1h.bmp");
 	}
 
 	TEST_METHOD(VerticalFlip) {
-		Image image("res/image.bmp");
+		image->flip(FlipDirection::VERTICAL);
 
-		image.flip(FlipDirection::VERTICAL);
-
-		image.saveImage("res/image_test1v.bmp");
+		image->saveImage("res/image_test1v.bmp");
 	}
 
 	TEST_METHOD(Rotation) {
-		Image image("res/image.bmp");
+		image->rotate(RotationDirection::RIGHT);
 
-		image.rotate(RotationDirection::RIGHT);
-
-		image.saveImage("res/image_test2.bmp");
+		image->saveImage("res/image_test2.bmp");
 	}
 };
 }
