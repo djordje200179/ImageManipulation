@@ -12,8 +12,8 @@ void Image::flip(FlipDirection direction) {
 				Coordinates firstCoordinate { i, j };
 				Coordinates secondCoordinate { i, dimensions.width - 1 - j };
 
-				auto firstPixel = getPixel(firstCoordinate);
-				auto secondPixel = getPixel(secondCoordinate);
+				auto firstPixel = getPixelPointer(firstCoordinate);
+				auto secondPixel = getPixelPointer(secondCoordinate);
 
 				std::swap_ranges(firstPixel, firstPixel + pixelSize, secondPixel);
 			}
@@ -23,8 +23,8 @@ void Image::flip(FlipDirection direction) {
 			Coordinates firstCoordinate { i, 0 };
 			Coordinates secondCoordinate { dimensions.height - 1 - i, 0 };
 
-			auto firstRow = getPixel(firstCoordinate);
-			auto secondRow = getPixel(secondCoordinate);
+			auto firstRow = getPixelPointer(firstCoordinate);
+			auto secondRow = getPixelPointer(secondCoordinate);
 
 			std::swap_ranges(firstRow, firstRow + (DataMetric)dimensions.width * pixelSize, secondRow);
 		}

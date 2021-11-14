@@ -39,7 +39,7 @@ void Image::loadImage(std::ifstream& stream) {
 
 	data.resize(getDataSize());
 	for(ImageMetric i = 0; i < dimensions.height; i++) {
-		stream.read(getPixel({ i, 0 }), (DataMetric)dimensions.width * pixelSize);
+		stream.read(getPixel({ i, 0 }).data(), (DataMetric)dimensions.width * pixelSize);
 
 		stream.seekg(padding, std::ios::cur);
 	}
@@ -56,7 +56,7 @@ void Image::saveImage(std::ofstream& stream) const {
 		padding = 4 - padding;
 
 	for(ImageMetric i = 0; i < dimensions.height; i++) {
-		stream.write(getPixel({ i, 0 }), (DataMetric)dimensions.width * pixelSize);
+		stream.write(getPixel({ i, 0 }).data(), (DataMetric)dimensions.width * pixelSize);
 
 		static const byte zero = 0;
 		stream.write(&zero, padding);

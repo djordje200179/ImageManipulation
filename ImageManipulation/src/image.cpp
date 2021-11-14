@@ -7,14 +7,18 @@ Image::Image(Dimensions dimensions, PixelMetric pixelSize, HeaderMetric headerSi
 	data.resize(getDataSize());
 }
 
-const byte* Image::getPixel(Coordinates coordinate) const {
-	auto offset = ((DataMetric)coordinate.y * dimensions.width + coordinate.x) * pixelSize;
-	return data.data() + offset;
+ConstPixel Image::getPixel(Coordinates coordinate) const {
+	auto pointer = getPixelPointer(coordinate);
+	auto view = std::span(pointer, pixelSize);
+
+	return view;
 }
 
-byte* Image::getPixel(Coordinates coordinate) {
-	auto offset = ((DataMetric)coordinate.y * dimensions.width + coordinate.x) * pixelSize;
-	return data.data() + offset;
+Pixel Image::getPixel(Coordinates coordinate) {
+	auto pointer = getPixelPointer(coordinate);
+	auto view = std::span(pointer, pixelSize);
+
+	return view;
 }
 
 Dimensions Image::getDimensions() const {
@@ -27,5 +31,15 @@ PixelMetric Image::getPixelSize() const {
 
 DataMetric Image::getDataSize() const {
 	return (DataMetric)dimensions.height * dimensions.width * pixelSize;
+}
+
+const byte* Image::getPixelPointer(Coordinates coordinate) const {
+	auto offset = ((DataMetric)coordinate.y * dimensions.width + coordinate.x) * pixelSize;
+	return data.data() + offset;
+}
+
+byte* Image::getPixelPointer(Coordinates coordinate) {
+	auto offset = ((DataMetric)coordinate.y * dimensions.width + coordinate.x) * pixelSize;
+	return data.data() + offset;
 }
 }

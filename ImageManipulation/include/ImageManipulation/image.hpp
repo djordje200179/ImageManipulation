@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <span>
 
 namespace ImageManipulation {
 using ImageMetric = uint32_t;
@@ -11,6 +12,8 @@ using PixelMetric = uint16_t;
 using HeaderMetric = uint32_t;
 
 using byte = char;
+using Pixel = std::span<byte>;
+using ConstPixel = std::span<const byte>;
 
 struct Dimensions {
 	ImageMetric height;
@@ -40,8 +43,8 @@ public:
 	Image(std::ifstream& stream);
 	Image(const std::string& filePath);
 
-	const byte* getPixel(Coordinates coordinate) const;
-	byte* getPixel(Coordinates coordinate);
+	ConstPixel getPixel(Coordinates coordinate) const;
+	Pixel getPixel(Coordinates coordinate);
 
 	Dimensions getDimensions() const;
 	PixelMetric getPixelSize() const;
@@ -64,5 +67,8 @@ private:
 
 	void loadImage(std::ifstream& stream);
 	DataMetric getDataSize() const;
+
+	const byte* getPixelPointer(Coordinates coordinate) const;
+	byte* getPixelPointer(Coordinates coordinate);
 };
 }
