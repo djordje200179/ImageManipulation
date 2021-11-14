@@ -7,16 +7,16 @@
 
 namespace ImageManipulation {
 typedef unsigned long long ull;
-typedef unsigned short us;
+typedef char byte;
 
 struct Dimensions {
-	us height;
-	us width;
+	uint32_t height;
+	uint32_t width;
 };
 
 struct Coordinates {
-	us y;
-	us x;
+	uint32_t y;
+	uint32_t x;
 };
 
 enum class FlipDirection {
@@ -34,21 +34,21 @@ enum class RotationDirection {
 class Image {
 private:
 	Dimensions dimensions;
-	unsigned short pixelSize;
+	uint16_t pixelSize;
 
-	std::vector<char> data;
+	std::vector<byte> data;
 
-	unsigned int headerSize;
-	std::vector<char> header;
+	uint32_t headerSize;
+	std::vector<byte> header;
 
 	void loadImage(std::ifstream& stream);
 public:
-	Image(Dimensions dimensions, unsigned short pixelSize, unsigned int headerSize);
+	Image(Dimensions dimensions, uint16_t pixelSize, uint32_t headerSize);
 	Image(std::ifstream& stream);
 	Image(const std::string& filePath);
 
-	std::vector<char>::const_iterator getPixel(Coordinates coordinate) const;
-	std::vector<char>::iterator getPixel(Coordinates coordinate);
+	std::vector<byte>::const_iterator getPixel(Coordinates coordinate) const;
+	std::vector<byte>::iterator getPixel(Coordinates coordinate);
 
 	Dimensions getDimensions() const;
 	unsigned short getPixelSize() const;

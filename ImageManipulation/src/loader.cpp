@@ -16,14 +16,14 @@ Image::Image(const std::string& filePath) {
 
 void Image::loadImage(std::ifstream& stream) {
 	stream.seekg(0x0A);
-	stream.read(reinterpret_cast<char*>(&headerSize), 4);
+	stream.read(reinterpret_cast<byte*>(&headerSize), 4);
 
 	stream.seekg(0x12);
-	stream.read(reinterpret_cast<char*>(&dimensions.width), 4);
-	stream.read(reinterpret_cast<char*>(&dimensions.height), 4);
+	stream.read(reinterpret_cast<byte*>(&dimensions.width), 4);
+	stream.read(reinterpret_cast<byte*>(&dimensions.height), 4);
 
 	stream.seekg(0x1C);
-	stream.read(reinterpret_cast<char*>(&pixelSize), 2);
+	stream.read(reinterpret_cast<byte*>(&pixelSize), 2);
 	pixelSize /= CHAR_BIT;
 
 	stream.clear();
@@ -32,12 +32,12 @@ void Image::loadImage(std::ifstream& stream) {
 	header.resize(headerSize);
 	stream.read(header.data(), headerSize);
 
-	auto padding = ((ull)dimensions.width * pixelSize) % 4;
+	uint8_t padding = ((ull)dimensions.width * pixelSize) % 4;
 	if(padding)
 		padding = 4 - padding;
 
 	data.resize((ull)dimensions.height * dimensions.width * pixelSize);
-	for(unsigned short i = 0; i < dimensions.height; i++) {
+	for(auto i = 0u; i < dimensions.height; i++) {
 		stream.read(&*getPixel({ i, 0 }), (ull)dimensions.width * pixelSize);
 
 		stream.seekg(padding, std::ios::cur);
@@ -50,14 +50,14 @@ void Image::saveImage(std::ofstream& stream) const {
 
 	stream.write(header.data(), headerSize);
 
-	auto padding = ((ull)dimensions.width * pixelSize) % 4;
+	uint8_t padding = ((ull)dimensions.width * pixelSize) % 4;
 	if(padding)
 		padding = 4 - padding;
 
-	auto zero = '\0';
-	for(unsigned short i = 0; i < dimensions.height; i++) {
+	for(auto i = 0u; i < dimensions.height; i++) {
 		stream.write(&*getPixel({ i, 0 }), (ull)dimensions.width * pixelSize);
 
+		static const byte zero = 0;
 		stream.write(&zero, padding);
 	}
 
@@ -65,7 +65,7 @@ void Image::saveImage(std::ofstream& stream) const {
 	stream.write(reinterpret_cast<const char*>(&dimensions.width), 4);
 	stream.write(reinterpret_cast<const char*>(&dimensions.height), 4);
 
-	auto pixelSize = this->pixelSize * CHAR_BIT;
+	uint16_t pixelSize = this->pixelSize * CHAR_BIT;
 	stream.seekp(0x1C);
 	stream.write(reinterpret_cast<const char*>(&pixelSize), 2);
 }
