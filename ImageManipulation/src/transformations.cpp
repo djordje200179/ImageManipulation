@@ -33,6 +33,6 @@ void Image::flip(FlipDirection direction) {
 }
 
 void Image::rotate(RotationDirection direction) {
-	throw "The function is not implemented yet.";
+	throw std::exception("The function is not implemented yet.");
 }
 }
