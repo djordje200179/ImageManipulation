@@ -12,10 +12,10 @@ void Image::flip(FlipDirection direction) {
 				Coordinates firstCoordinate { i, j };
 				Coordinates secondCoordinate { i, dimensions.width - 1 - j };
 
-				auto firstRow = getPixel(firstCoordinate);
-				auto secondRow = getPixel(secondCoordinate);
+				auto firstPixel = getPixel(firstCoordinate);
+				auto secondPixel = getPixel(secondCoordinate);
 
-				std::swap_ranges(firstRow, firstRow + pixelSize, secondRow);
+				std::swap_ranges(firstPixel, firstPixel + pixelSize, secondPixel);
 			}
 		}
 	} else if(direction == FlipDirection::VERTICAL) {
