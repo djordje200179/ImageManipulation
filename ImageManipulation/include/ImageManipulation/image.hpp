@@ -41,6 +41,7 @@ private:
 	byte* header;
 
 	void loadImage(std::ifstream& stream);
+	ull getDataSize() const;
 public:
 	Image(Dimensions dimensions, uint16_t pixelSize, uint32_t headerSize);
 	Image(std::ifstream& stream);

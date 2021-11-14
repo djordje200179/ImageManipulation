@@ -4,7 +4,7 @@ namespace ImageManipulation {
 Image::Image(Dimensions dimensions, uint16_t pixelSize, uint32_t headerSize)
 	: dimensions(dimensions), pixelSize(pixelSize), headerSize(headerSize) {
 	header = new byte[headerSize];
-	data = new byte[(ull)dimensions.height * dimensions.width * pixelSize];
+	data = new byte[getDataSize()];
 }
 
 const byte* Image::getPixel(Coordinates coordinate) const {
@@ -27,5 +27,9 @@ Dimensions Image::getDimensions() const {
 
 unsigned short Image::getPixelSize() const {
 	return pixelSize;
+}
+
+ull Image::getDataSize() const {
+	return (ull)dimensions.height * dimensions.width * pixelSize;
 }
 }

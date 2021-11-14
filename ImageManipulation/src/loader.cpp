@@ -40,7 +40,7 @@ void Image::loadImage(std::ifstream& stream) {
 	if(padding)
 		padding = 4 - padding;
 
-	data = new byte[(ull)dimensions.height * dimensions.width * pixelSize];
+	data = new byte[getDataSize()];
 	for(auto i = 0u; i < dimensions.height; i++) {
 		stream.read(getPixel({ i, 0 }), (ull)dimensions.width * pixelSize);
 
