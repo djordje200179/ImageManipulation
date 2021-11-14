@@ -2,7 +2,6 @@
 
 #include <fstream>
 #include <string>
-#include <utility>
 
 namespace ImageManipulation {
 using ull = unsigned long long;
