@@ -9,8 +9,15 @@ namespace ImageManipulation {
 typedef unsigned long long ull;
 typedef unsigned short us;
 
-typedef std::pair<us, us> Dimensions;
-typedef std::pair<us, us> Coordinates;
+struct Dimensions {
+	us height;
+	us width;
+};
+
+struct Coordinates {
+	us y;
+	us x;
+};
 
 enum class FlipDirection {
 	NONE = 0,
