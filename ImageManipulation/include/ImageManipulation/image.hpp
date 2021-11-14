@@ -17,14 +17,14 @@ struct Coordinates {
 	uint32_t x;
 };
 
-enum class FlipDirection {
+enum class FlipDirection : uint8_t {
 	NONE = 0,
 	HORIZONTAL = 1,
 	VERTICAL = 2,
 	BOTH = 3
 };
 
-enum class RotationDirection {
+enum class RotationDirection : uint8_t {
 	LEFT,
 	RIGHT
 };
