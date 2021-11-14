@@ -1,5 +1,6 @@
 #include "pch.hpp"
 #include <algorithm>
+#include <execution>
 
 namespace ImageManipulation {
 void Image::flip(FlipDirection direction) {
@@ -15,7 +16,7 @@ void Image::flip(FlipDirection direction) {
 				auto firstPixel = getPixelPointer(firstCoordinate);
 				auto secondPixel = getPixelPointer(secondCoordinate);
 
-				std::swap_ranges(firstPixel, firstPixel + pixelSize, secondPixel);
+				std::swap_ranges(std::execution::par_unseq, firstPixel, firstPixel + pixelSize, secondPixel);
 			}
 		}
 	} else if(direction == FlipDirection::VERTICAL) {
@@ -26,7 +27,7 @@ void Image::flip(FlipDirection direction) {
 			auto firstRow = getPixelPointer(firstCoordinate);
 			auto secondRow = getPixelPointer(secondCoordinate);
 
-			std::swap_ranges(firstRow, firstRow + (DataMetric)dimensions.width * pixelSize, secondRow);
+			std::swap_ranges(std::execution::par_unseq, firstRow, firstRow + (DataMetric)dimensions.width * pixelSize, secondRow);
 		}
 	}
 }
