@@ -5,8 +5,8 @@
 #include <utility>
 
 namespace ImageManipulation {
-typedef unsigned long long ull;
-typedef char byte;
+using ull = unsigned long long;
+using byte = char;
 
 struct Dimensions {
 	uint32_t height;
