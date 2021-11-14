@@ -14,10 +14,6 @@ Image::Image(const std::string& filePath) {
 	stream.close();
 }
 
-Image::~Image() {
-	delete data;
-}
-
 void Image::loadImage(std::ifstream& stream) {
 	stream.seekg(0x0A);
 	stream.read(reinterpret_cast<byte*>(&headerSize), 4);

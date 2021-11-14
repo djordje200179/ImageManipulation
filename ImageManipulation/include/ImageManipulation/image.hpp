@@ -31,17 +31,6 @@ enum class RotationDirection {
 };
 
 class Image {
-private:
-	Dimensions dimensions;
-	uint16_t pixelSize;
-
-	byte* data;
-
-	uint32_t headerSize;
-	byte* header;
-
-	void loadImage(std::ifstream& stream);
-	ull getDataSize() const;
 public:
 	Image(Dimensions dimensions, uint16_t pixelSize, uint32_t headerSize);
 	Image(std::ifstream& stream);
@@ -62,5 +51,16 @@ public:
 	void rotate(RotationDirection direction);
 
 	void invert();
+private:
+	Dimensions dimensions;
+	uint16_t pixelSize;
+
+	byte* data;
+
+	uint32_t headerSize;
+	byte* header;
+
+	void loadImage(std::ifstream& stream);
+	ull getDataSize() const;
 };
 }

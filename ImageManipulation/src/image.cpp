@@ -7,6 +7,10 @@ Image::Image(Dimensions dimensions, uint16_t pixelSize, uint32_t headerSize)
 	data = new byte[getDataSize()];
 }
 
+Image::~Image() {
+	delete data;
+}
+
 const byte* Image::getPixel(Coordinates coordinate) const {
 	auto begin = data;
 	auto offset = ((ull)coordinate.y * dimensions.width + coordinate.x) * pixelSize;
@@ -25,7 +29,7 @@ Dimensions Image::getDimensions() const {
 	return dimensions;
 }
 
-unsigned short Image::getPixelSize() const {
+uint16_t Image::getPixelSize() const {
 	return pixelSize;
 }
 
